@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>teleop_twist_keyboard</name>
+  <version>1.2.4</version>
+  <description>
+    Provides teleoperation using keyboard for Nanny Robot.
+  </description>
+  <license>BSD</license>
+
+  <maintainer email="TODO@TODO.com">NAME</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <depend>geometry_msgs</depend>
+</package>
