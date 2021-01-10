@@ -4,17 +4,17 @@ Generic Keyboard Teleop for ROS
 # Launch
 Run.
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+roslaunch nanny_control teleop_twist.launch
 ```
 
 With custom values.
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py _speed:=0.9 _turn:=0.8
+roslaunch nanny_control teleop_twist.launch _speed:=0.9 _turn:=0.8
 ```
 
 Publishing to a different topic (in this case `my_cmd_vel`).
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=my_cmd_vel
+roslaunch nanny_control teleop_twist.launch cmd_vel:=my_cmd_vel
 ```
 
 # Usage
@@ -51,7 +51,7 @@ If your mobile base requires constant updates on the cmd\_vel topic, teleop\_twi
 For example, to repeat the last command at 10Hz:
 
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py _repeat_rate:=10.0
+roslaunch nanny_control teleop_twist.launch _repeat_rate:=10.0
 ```
 
 It is _highly_ recommened that the repeat rate be used in conjunction with the key timeout, to prevent runaway robots.
@@ -62,7 +62,7 @@ Teleop\_twist\_keyboard can be configured to stop your robot if it does not rece
 
 For example, to stop your robot if a keypress has not been received in 0.6 seconds:
 ```
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py _key_timeout:=0.6
+roslaunch nanny_control teleop_twist.launch _key_timeout:=0.6
 ```
 
 It is recommended that you set `key_timeout` higher than the initial key repeat delay on your system (This delay is 0.5 seconds by default on Ubuntu, but can be adjusted).
