@@ -1,5 +1,5 @@
 <launch>
-	<node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node">
+	<node pkg="nanny_control" name="teleop_twist_joy" type="teleop_node">
    		 <rosparam command="load" file="$(find nanny_control)/config/xbox.config.yaml" />
    	 	<remap from="cmd_vel" to="/diff_drive_ctrl/cmd_vel"/>        
 	</node>

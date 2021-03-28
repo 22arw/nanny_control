@@ -1,0 +1,7 @@
+
+gazebo_ros_control: #These gains are only used by gazebo
+  pid_gains:
+     right_wheel: {p: 70.0, i: 20.0, d: 2.0} # values for testing
+     left_wheel: {p: 70.0, i: 20.0, d: 2.0}
+#    base_link_right_wheel: {p: 70.0, i: 20.0, d: 2.0}
+#    base_link_left_wheel: {p: 70.0, i: 20.0, d: 2.0}
