@@ -1,0 +1,8 @@
+# currently not working...
+# needs configured 
+gazebo_ros_control: 
+ pid_gains:
+#    right_wheel: {p: 7.0, i: 1.0, d: 0.1} # values for testing
+#    left_wheel: {p: 7.0, i: 1.0, d: 0.1}
+    base_link_right_wheel: {p: -0.28302, i: 0.0, d: 0.048701}
+    base_link_left_wheel: {p: 0.28302, i: 0.0, d: 0.048701}

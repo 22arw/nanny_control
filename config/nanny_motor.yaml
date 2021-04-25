@@ -1,0 +1,41 @@
+defaults: # optional, all defaults can be overwritten per node
+  ### 301
+  eds_pkg: nanny_description # optional package  name for relative path
+  eds_file: "testcan/nanny.eds" # path to EDS/DCF file
+  motor_allocator: canopen::Motor402::Allocator # select allocator for motor layer
+  motor_layer: # settings passed to motor layer (plugin-specific)
+   switching_state: 2 # (Operation_Enable), state for mode switching
+#  pos_to_device: "rint(rad2deg(pos)*1000)" # rad -> mdeg
+#  pos_from_device: "deg2rad(obj6064)/1000" # actual position [mdeg] -> rad
+  vel_to_device: "rint(rad2deg(vel)*1000)" # rad/s -> mdeg/s
+  vel_from_device: "deg2rad(obj606C)/1000" # actual velocity [mdeg/s] -> rad/s
+
+
+
+dcf_overlay: # "ObjectID": "ParameterValue" (both as strings)
+    "1a03sub0": "1"
+    "1a03sub1": "0x60410010"
+#    "1a01sub0": "1"
+#    "1a01sub1": "0x60610008"    
+#    "1a02sub0": "2"
+#    "1a02sub1": "0x60640020" 
+#    "1a03sub0": "2"
+#    "1a03sub1": "0x606C0020"
+#    "1a04sub0": "1"
+#    "1a04sub1": "0x60770010" 
+#    "1a05sub0": "0" 
+#    "1a05sub1": " "
+#    "1a06sub0": "1"
+#    "1a06sub1": "0x60FD0020"
+
+
+nodes:
+  base_link_left_wheel:
+    id: 1
+    publish: ["6042"]
+
+  base_link_right_wheel:
+    id: 16
+    publish: ["6042"]
+    
+

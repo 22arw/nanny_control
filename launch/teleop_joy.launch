@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="joy" type="joy_node" name="joy_node">
+    <param name="deadzone" value="0.3" />
+    <param name="autorepeat_rate" value="1" />
+  </node>
+	<node pkg="teleop_twist_joy"  type="teleop_node" name="teleop">
+   		 <rosparam command="load" file="$(find nanny_control)/config/xbox.config.yaml" />
+   	 	<remap from="cmd_vel" to="/diff_drive_ctrl/cmd_vel"/>        
+	</node>
+
+</launch>

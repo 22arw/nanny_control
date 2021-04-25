@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- Gazebo sim settings -->
+
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="model" default="$(find nanny_description)/urdf/covid_killer_robot.urdf"/>
+  <arg name="yaw" default="1.5708"/>
+
+<!-- Pull in grocery store world -->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(find nanny_gazebo)/worlds/grocery_store.world"/>
+  </include>
+
+<!-- Spawn URDF -->
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.1 -unpause -urdf -model covid_killer_robot -param robot_description -Y $(arg yaw)" respawn="false" output="screen" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="-model covid_killer_robot -param robot_description" output="screen"/>
+
+<!-- Launch controllers & steering -->
+   
+  <rosparam file="$(find nanny_control)/config/coach_nanny_diff_drive.yaml" command="load" ns="diff_drive_ctrl" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="diff_drive_ctrl">
+     <param name="default_topic" value="/diff_drive_ctrl/cmd_vel"/>
+  </node>
+     
+<!-- canOPEN 
+
+   <rosparam command="load" file="$(find nanny_control)/test/pid.yaml"/> -->
+
+   <node pkg="canopen_motor_node" name="canopen_motor_node" type="canopen_motor_node" >
+      <rosparam command="load" file="$(find nanny_control)/config/can.yaml" />
+      <rosparam command="load" file="$(find nanny_control)/config/nanny_motor.yaml" />
+      <rosparam command="load" file="$(find nanny_control)/config/test_limits.yaml"/>
+   </node>
+
+<!-- Teleop Twist for controll with keyboard -->
+   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop">
+     <remap from="cmd_vel" to="/diff_drive_ctrl/cmd_vel"/>
+   </node>
+
+<!-- Roboteq driver node
+<rosparam command="load" file="$(find roboteq_motor_controller_driver)/config/query.yaml" />
+
+<node name = "roboteq_motor_controller_driver" pkg = "roboteq_motor_controller_driver" type = "roboteq_motor_controller_driver_node" output = "screen">
+
+
+</node>
+-->
+</launch>

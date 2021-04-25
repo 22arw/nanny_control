@@ -1,0 +1,7 @@
+bus:
+  device: vcan0
+  driver_plugin: can::SocketCANInterface
+  master_allocator: canopen::SimpleMaster::Allocator
+sync:
+  interval_ms: 10
+  overflow: 0
