@@ -1,6 +1,9 @@
 # teleop_twist_keyboard
 Generic Keyboard Teleop for ROS
-
+# Install
+```
+sudo apt-get install ros-melodic-teleop-twist-keyboard
+```
 # Launch
 Run.
 ```
