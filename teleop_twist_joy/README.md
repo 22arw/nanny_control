@@ -2,7 +2,10 @@ teleop_twist_joy [![Build Status](https://travis-ci.org/ros-teleop/teleop_twist_
 ================
 
 Simple joystick teleop for twist robots. See [ROS Wiki](http://wiki.ros.org/teleop_twist_joy)
-
+# Install Joy
+```
+sudo apt-get install ros-melodic-joy
+```
 # First time setting up Xbox controller
 Install xbox driver: 
 ```
@@ -14,7 +17,7 @@ Install sysfsutils for bluetooth connection:
 sudo apt install sysfsutils
 ```
 
-Edit file with "sudo nano /etx/sysfs.conf":
+Edit file with "sudo nano /etc/sysfs.conf":
 ```
 at bottom of file add : /module/bluetooth/parameters/disable_ertm=1 (Restart device for changes to take effect)
 ```
